@@ -24,18 +24,27 @@ Current Features:
 Future Features:
   
 - Unit Conversion for the Following Metrics:
-  - Length
+  - Distance
+  - Temperature
   - Weight
+  - Area
   - Volume
+  - Pressure
   - Density
-  - Flow Rate
+  - Volumetric Flowrate
 
 - Conversion from PSI to Head Pressure for varying Fluids
 - Conversion from Head Pressure to PSI for varying Fluids
 
+- Net Positive Suction Head Available (NPSHa) Calculation
+
+- Minimum Pipe Wall Thickness Calculation
 
 
 
 Future GUI Features:
 
 - A console to display all results from calculations
+
+
+
