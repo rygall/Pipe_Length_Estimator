@@ -4,7 +4,7 @@ Summary:
 
 I am developing this program while I work as a mechanical engineer designing piping systems. I do a lot of day to day calculations that are a bit repititive, so I 
 figured why not just develop some software to provide an easy to use GUI where all of my calculations can be done in one place rather than having to jump around 
-between different documents and softwares.
+between different documents and software.
 
 
 
