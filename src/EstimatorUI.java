@@ -19,7 +19,7 @@ public class EstimatorUI {
                 unitsList,
                 unitsList.length);
         if (unitsInput == null) {
-            System.exit(0);
+            return;
         }
 
         String unitsOutput = (String) JOptionPane.showInputDialog(
@@ -31,7 +31,7 @@ public class EstimatorUI {
                 unitsList,
                 unitsList.length);
         if (unitsOutput == null) {
-            System.exit(0);
+            return;
         }
 
 
@@ -44,7 +44,7 @@ public class EstimatorUI {
                 String pipeLengthString = JOptionPane.showInputDialog("Please enter the first measurement in "
                         + unitsInput.toLowerCase() + ".");
                 if (pipeLengthString == null) {
-                    System.exit(0);
+                    return;
                 }
                 double pipeLength = Double.parseDouble(pipeLengthString);
                 pipeSectionLengths.add(pipeLength);
@@ -77,7 +77,7 @@ public class EstimatorUI {
                     String pipeLengthString = JOptionPane.showInputDialog("Please enter the next measurement in "
                             + unitsInput.toLowerCase() + ".");
                     if (pipeLengthString == null) {
-                        System.exit(0);
+                        return;
                     }
                     double pipeLength = Double.parseDouble(pipeLengthString);
                     pipeSectionLengths.add(pipeLength);

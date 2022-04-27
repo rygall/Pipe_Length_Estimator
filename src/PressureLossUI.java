@@ -10,24 +10,28 @@ public class PressureLossUI {
         //OTHERWISE WE WOULD BE ADDING VALVES WITH NO INNER DIAMETER TO CALCULATE EQUIVALENT LENGTH
 
         //obtaining pipe length
+	    //this is wrapped in a try-catch block in order to make sure we get a number from users
         int exception1 = 1;
         while (exception1 == 1) {
-            try {
-                double pipeLength = Double.parseDouble(
-                        JOptionPane.showInputDialog("Please enter the length of the pipe in feet."));
-                pipe.setLength(pipeLength);
-                exception1 = 0;
-            } catch (NumberFormatException e) {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "INVALID ENTRY...PLEASE ENTER A NUMBER");
-                exception1 = 1;
-            } catch (Exception e) {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "SOMETHING WENT WRONG...PLEASE TRY AGAIN");
-                exception1 = 1;
-            }
-        }
-
+           try {
+               String pipeLengthString = JOptionPane.showInputDialog("Please enter the length of pipe in feet.");
+               if (pipeLengthString == null) {
+                   return;
+               }
+               double pipeLength = Double.parseDouble(pipeLengthString);
+               pipe.setLength(pipeLength);
+               exception1 = 0;
+           } catch (NumberFormatException e) {
+               JFrame frame = new JFrame();
+               JOptionPane.showMessageDialog(frame, "INVALID ENTRY...PLEASE ENTER A NUMBER");
+               exception1 = 1;
+           } catch (Exception e) {
+               JFrame frame = new JFrame();
+               JOptionPane.showMessageDialog(frame, "SOMETHING WENT WRONG...PLEASE TRY AGAIN");
+               exception1 = 1;
+           }
+       }
+ 
 
         //obtaining pipe size
         String[] npsList = {"1/4", "3/8", "1/2", "3/4", "1", "1-1/4", "1-1/2", "2", "2-1/2", "3",
@@ -41,7 +45,7 @@ public class PressureLossUI {
                 npsList,
                 npsList.length);
         if (pipeNPS == null) {
-            System.exit(0);
+            return;
         }
         pipe.setNPS(pipeNPS);
 
@@ -58,7 +62,7 @@ public class PressureLossUI {
                 materialList,
                 materialList.length);
         if (pipeMaterial == null) {
-            System.exit(0);
+            return;
         }
         pipe.setMaterial(pipeMaterial);
 
@@ -81,7 +85,7 @@ public class PressureLossUI {
                     valveList,
                     valveList.length);
             if (valve == null) {
-                System.exit(0);
+                return;
             }
             pipe.addValve(valve);
             valveOption = JOptionPane.showConfirmDialog(
@@ -103,29 +107,32 @@ public class PressureLossUI {
                 fluidList,
                 fluidList.length);
         if (pipeFluid == null) {
-            System.exit(0);
+            return;
         }
         pipe.setFluid(pipeFluid);
 
 
-        //obtaining the flow rate
-        int exception2 = 1;
+        //obtaining the flowrate
+    	int exception2 = 1;
         while (exception2 == 1) {
-            try {
-                double flowRate = Double.parseDouble(
-                        JOptionPane.showInputDialog("Please enter the flow rate in gallons per minute."));
+		    try {
+                String flowRateString = JOptionPane.showInputDialog("Please enter the flowrate in gallons per minute.");
+                if (flowRateString == null) {
+                    return;
+                }
+                double flowRate = Double.parseDouble(flowRateString);
                 pipe.setFlowRate(flowRate);
                 exception2 = 0;
-            } catch (NumberFormatException e) {
+           	} catch (NumberFormatException e) {
                 JFrame frame = new JFrame();
                 JOptionPane.showMessageDialog(frame, "INVALID ENTRY...PLEASE ENTER A NUMBER");
                 exception2 = 1;
-            } catch (Exception e) {
+           	} catch (Exception e) {
                 JFrame frame = new JFrame();
                 JOptionPane.showMessageDialog(frame, "SOMETHING WENT WRONG...PLEASE TRY AGAIN");
                 exception2 = 1;
-            }
-        }
+           }
+       }
 
 
         //obtaining change in elevation
@@ -144,7 +151,7 @@ public class PressureLossUI {
                             + String.format("\n(Positive Values for Positive " +
                             "Changes in the Delta Z direction)"));
                     if (elevationchangeString == null) {
-                        System.exit(0);
+                        return;
                     }
                     double elevationchange = Double.parseDouble(elevationchangeString);
                     pipe.setElevationChange(elevationchange);
@@ -162,6 +169,7 @@ public class PressureLossUI {
         }
 
 
+
         //retrieving pressure loss calculations, unpacking them and then storing them as local variables
         double[] results = pipe.getPressureLoss();
         double velocity = results[0];
@@ -172,8 +180,7 @@ public class PressureLossUI {
 
         //printing results
         JFrame g = new JFrame();
-        JOptionPane.showMessageDialog(g,
-                String.format("Velocity (ft/s) : %.2f", velocity)
+        JOptionPane.showMessageDialog(g, String.format("Velocity (ft/s) : %.2f", velocity)
                         + String.format("\nReynolds Number : %.0f", reynolds)
                         + String.format("\nFriction Factor : %.4f", frictionfactor)
                         + String.format("\nPressure Loss (psi): %.2f", pressureloss));
