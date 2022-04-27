@@ -1,4 +1,4 @@
-# pipingHandCalcs
+# pipinghandcalcs
 
 Summary:
 
