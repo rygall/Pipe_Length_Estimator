@@ -45,11 +45,13 @@ Future Features:
 
 - Minimum Pipe Wall Thickness Calculation
 
-
+- Provide a functionality to input the temperature of fluid in the system for all calculations in order to more accurately calculation the properties of the fluid.
 
 Future GUI Features:
 
 - A console to display all results from calculations
+
+
 
 
 
