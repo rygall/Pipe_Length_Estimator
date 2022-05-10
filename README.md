@@ -47,12 +47,12 @@ Future Features:
 
 - Provide a functionality to input the temperature of fluid in the system for all calculations in order to more accurately calculation the properties of the fluid.
 
-- Have one popup window to provide all required input for a calcaulation rather than a bunch of different seperate popup windows
 
 Future GUI Features:
 
 - A console to display all results from calculations
 
+- Have one popup window to provide all required input for a calcaulation rather than a bunch of different seperate popup windows
 
 
 
