@@ -32,7 +32,7 @@ Current Features:
 Future Features:
   
 - Unit Conversion for the Following Metrics:
-  - Distance
+  - Length
   - Temperature
   - Weight
   - Area
