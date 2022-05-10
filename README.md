@@ -7,7 +7,7 @@ Current Features:
 
     Typically when doing a pressure drop calculation, the pressure drop is being estimated for a system that isnt actually built, and a typical procedure is to take a
     preliminary length, add 25% to that length, and then estimate the standard 90 degree elbows and standard 45 degree elbows that will be in the estimated length of 
-    pipe. The estimaion is one standard 90 degree elbow and one standard 45 degree elbow for every 8 feet of estimated pipe.
+    pipe. The estimation made is one standard 90 degree elbow and one standard 45 degree elbow for every 8 feet of estimated pipe.
   
 - Pressure Drop Calculations
 
