@@ -13,7 +13,6 @@ public class PressureLoss {
         //System.out.println(relrough);
 
 
-        //CALCULATING A, B OR F IS WRONG. I NEED TO FIX
         //below is the friction factor, F, calculation using the Churchill Equation.
         //the calculations are broken up into small steps.
         //calculating A
