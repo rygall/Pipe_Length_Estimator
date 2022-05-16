@@ -44,8 +44,6 @@ Future GUI Features:
 
 - A console to display all results from calculations
 
-- Have one popup window to provide all required input for a calcaulation rather than a bunch of different seperate popup windows
-
 
 
 
