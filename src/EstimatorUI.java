@@ -17,18 +17,18 @@ public class EstimatorUI extends JFrame implements ActionListener {
     EstimatorUI() {
 
         //string array to be used for combo boxes
-        String[] units = {"Feet", "Meters", "Inches", "Millimeters"};
+        String[] units = {"feet", "meters", "inches", "millimeters"};
 
         //creates combo box to select input units
         InputUnitsOptions = new JComboBox(units);
         InputUnitsOptions.addActionListener(this);
-        InputUnitsOptions.setBounds(10, 10, 100, 30);
+        InputUnitsOptions.setBounds(10, 10, 110, 30);
         InputUnitsOptions.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
         //creates combo box to select desired output units
         OutputUnitsOptions = new JComboBox(units);
         OutputUnitsOptions.addActionListener(this);
-        OutputUnitsOptions.setBounds(10, 50, 100, 30);
+        OutputUnitsOptions.setBounds(10, 50, 110, 30);
         OutputUnitsOptions.setSelectedIndex(0);
         OutputUnitsOptions.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
@@ -161,42 +161,26 @@ public class EstimatorUI extends JFrame implements ActionListener {
             int elbows90 = (int) results[1];
             int elbows45 = (int) results[2];
 
-
-
-            //printing the estimated length as well as estimated 90s and 45s
-            if (unitsOutput.equalsIgnoreCase("feet")) {
-                JFrame f = new JFrame();
-                JOptionPane.showMessageDialog(f,
-                        String.format("The estimated total length of the pipe is: %.2f %s",
-                                length, unitsOutput.toLowerCase())
-                                + "\nEstimated number of 90 degree elbows: " + elbows90
-                                + "\nEstimated number of 45 degree elbows: " + elbows45);
-            }
+            //converting length to desired output length
             if (unitsOutput.equalsIgnoreCase("meters")) {
-                JFrame f = new JFrame();
-                JOptionPane.showMessageDialog(f,
-                        String.format("The estimated total length of the pipe is: %.2f %s",
-                                UnitConversion.feetToMeters(length), unitsOutput.toLowerCase())
-                                + "\nEstimated number of 90 degree elbows: " + elbows90
-                                + "\nEstimated number of 45 degree elbows: " + elbows45);
+                length = UnitConversion.feetToMeters(length);
             }
             if (unitsOutput.equalsIgnoreCase("inches")) {
-                JFrame f = new JFrame();
-                JOptionPane.showMessageDialog(f,
-                        String.format("The estimated total length of the pipe is: %.2f %s",
-                                UnitConversion.feetToInches(length), unitsOutput.toLowerCase())
-                                + "\nEstimated number of 90 degree elbows: " + elbows90
-                                + "\nEstimated number of 45 degree elbows: " + elbows45);
+                length = UnitConversion.feetToInches(length);
             }
             if (unitsOutput.equalsIgnoreCase("millimeters")) {
-                JFrame f = new JFrame();
-                JOptionPane.showMessageDialog(f,
-                        String.format("The estimated total length of the pipe is: %.2f %s",
-                                UnitConversion.feetToMillimeters(length), unitsOutput.toLowerCase())
-                                + "\nEstimated number of 90 degree elbows: " + elbows90
-                                + "\nEstimated number of 45 degree elbows: " + elbows45);
+                length = UnitConversion.feetToMillimeters(length);
             }
 
+            //printing inputs and results to console
+            System.out.println("**LENGTH & FITTINGS ESTIMATION**");
+            System.out.printf("[Input] Total Measured Length = %.2f %s\n", totalLength, unitsInput);
+            System.out.printf("[Output] Estimated Total Length = %.2f %s\n", length, unitsOutput);
+            System.out.printf("[Output] Estimated 90 Degree Elbows: %d\n", elbows90);
+            System.out.printf("[Output] Estimated 45 Degree Elbows: %d\n", elbows45);
+
+            //closing EstimatorUI JFrame
+            dispose();
 
         }
     }

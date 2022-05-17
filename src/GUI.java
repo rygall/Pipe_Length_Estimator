@@ -1,7 +1,8 @@
 import javax.swing.*; 
 import java.awt.*; 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.io.*;
+
 
 public class GUI extends JFrame implements ActionListener {
 
@@ -9,6 +10,7 @@ public class GUI extends JFrame implements ActionListener {
 	JButton PressureLossButton;
 	JButton HeadToPSIButton;
 	JButton PSIToHeadButton;
+	TextAreaOutputStream console;
 
 
 
@@ -53,7 +55,7 @@ public class GUI extends JFrame implements ActionListener {
 		//options panel which contains buttons
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setBackground(Color.darkGray);
-		optionsPanel.setBounds(0, 100, 500, 300);
+		optionsPanel.setBounds(0, 100, 500, 600);
 
 		//pipe icon for title JPanel
 		ImageIcon pipeIcon = new ImageIcon("pipeicon.png");
@@ -72,11 +74,56 @@ public class GUI extends JFrame implements ActionListener {
 		titlePanel.setLayout(new BorderLayout());
 		titlePanel.add(titleLabel);
 
+		//label for results panel
+		JLabel resultsLabel = new JLabel();
+		resultsLabel.setText("RESULTS");
+		resultsLabel.setFont(new Font("Segoe UI", Font.PLAIN, 25));
+		resultsLabel.setVerticalAlignment(JLabel.CENTER);
+		resultsLabel.setHorizontalAlignment(JLabel.CENTER);
+
+		//jpanel to label results
+		JPanel resultsPanel = new JPanel();
+		resultsPanel.setBackground(Color.lightGray);
+		resultsPanel.setBounds(510, 0, 500, 100);
+		resultsPanel.setLayout(new BorderLayout());
+		resultsPanel.add(resultsLabel);
+
+		//results text area
+		JTextArea ta = new JTextArea();
+		ta.setEditable(false);
+		ta.setBackground(Color.white);
+		ta.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		ta.setForeground(Color.BLACK);
+		ta.setBounds(20, 10, 450, 590);
+		console = new TextAreaOutputStream(ta, 22);
+		PrintStream resultsStream = new PrintStream(console);
+		System.setOut(resultsStream);
+		System.setErr(resultsStream);
+
+		//JScrollPane that contains output stream
+		JScrollPane consolePanel = new JScrollPane();
+		consolePanel.setBackground(Color.white);
+		consolePanel.setBounds(510, 100, 500, 600);
+		consolePanel.setLayout(null);
+		consolePanel.createVerticalScrollBar();
+		consolePanel.add(ta);
+
+		//JPanel to split calc options and results
+		JPanel middleBarPanel = new JPanel();
+		middleBarPanel.setBackground(Color.BLACK);
+		middleBarPanel.setBounds(500, 100, 10, 600);
+
+		//JPanel sitting above bar to split options
+		JPanel upperMiddleBarPanel = new JPanel();
+		upperMiddleBarPanel.setBackground(Color.BLACK);
+		upperMiddleBarPanel.setBounds(500, 0, 10, 100);
+
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(null);
 		this.setTitle("Piping Hand Calcs");
 		this.setIconImage(pipeIcon.getImage());
-		this.setSize(500, 400);
+		this.setSize(1010, 700);
 		this.setVisible(true);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -85,32 +132,43 @@ public class GUI extends JFrame implements ActionListener {
 		this.add(PressureLossButton);
 		this.add(HeadToPSIButton);
 		this.add(PSIToHeadButton);
-		this.add(optionsPanel);
 		this.add(titlePanel);
+		this.add(optionsPanel);
+		this.add(upperMiddleBarPanel);
+		this.add(middleBarPanel);
+		this.add(resultsPanel);
+		this.add(consolePanel);
 
 	}
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
 		//if estimator button is clicked open the estimator UI
         if (e.getSource()==EstimatorButton) {
+			console.clear();
             EstimatorUI estimatorexecute = new EstimatorUI();
         }
 		//if pressure loss button is clicked open the pressure loss UI
         if (e.getSource()==PressureLossButton) {
+			console.clear();
             PressureLossUI pressurelossexecute = new PressureLossUI();
         }
 		//if the head to psi button is clicked open the head to psi UI
 		if (e.getSource()==HeadToPSIButton) {
+			console.clear();
 			HeadToPSIUI headtopsiexecute = new HeadToPSIUI();
 		}
 		//if the psi to head button is clicked open the psi to head UI
 		if (e.getSource()==PSIToHeadButton) {
+			console.clear();
 			PSIToHeadUI psitoheadexecute = new PSIToHeadUI();
 		}
 
 
     }
+
+
 
 }

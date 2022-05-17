@@ -43,7 +43,7 @@ public class PressureLossUI extends JFrame implements ActionListener {
         //combo box to select system fluid
         FluidOptions = new JComboBox(fluidList);
         FluidOptions.addActionListener(this);
-        FluidOptions.setBounds(10, 10, 105, 30);
+        FluidOptions.setBounds(10, 10, 110, 30);
         FluidOptions.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
         //text field for flowrate
@@ -83,7 +83,7 @@ public class PressureLossUI extends JFrame implements ActionListener {
         PipeLengthField.setBounds(10, 170, 100, 30);
         PipeLengthField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         //string array to be used for units combo boxes
-        String[] lengthUnitsList = {"Feet", "Meters", "Inches", "Millimeters"};
+        String[] lengthUnitsList = {"feet", "meters", "inches", "millimeters"};
         //creates combo box to select input units for length
         PipeLengthUnitsOptions = new JComboBox(lengthUnitsList);
         PipeLengthUnitsOptions.addActionListener(this);
@@ -95,7 +95,7 @@ public class PressureLossUI extends JFrame implements ActionListener {
         PipeElevationChangeField.setBounds(10, 210, 100, 30);
         PipeElevationChangeField.setFont(new Font("Segoe UI", Font.PLAIN, 15));
         //string array to be used for units combo boxes
-        String[] heightUnitsList = {"Feet", "Meters", "Inches", "Millimeters"};
+        String[] heightUnitsList = {"feet", "meters", "inches", "millimeters"};
         //creates combo box to select input units for length
         PipeElevationChangeOptions = new JComboBox(heightUnitsList);
         PipeElevationChangeOptions.addActionListener(this);
@@ -263,8 +263,8 @@ public class PressureLossUI extends JFrame implements ActionListener {
 
             /* SETTING THE FLOWRATE OF THE PIPE OBJECT */
             double flowRate = 0;
-            String flowrateString = PipeLengthField.getText().trim();
-            if (!(flowrateString.length() == 0)) { //checking to see if there is a value in the field
+            String flowrateString = FlowrateField.getText().trim(); //obtaining the text field input and trimming it
+            if (!(flowrateString.length() == 0)) { //if the field is not empty...do the following
                 try {
                     flowRate =  Double.parseDouble(flowrateString); //setting value in field to a double
                 } catch (NumberFormatException numberFormatException) {
@@ -276,21 +276,13 @@ public class PressureLossUI extends JFrame implements ActionListener {
                 }
             }
             //storing flowrate units into local string
-            String flowrateUnits = (String) PipeLengthUnitsOptions.getSelectedItem();
+            String flowrateUnits = (String) FlowrateOptions.getSelectedItem();
             //stores the flowrate into the pipe object in gpm
-            if (flowrateUnits.equalsIgnoreCase("feet")) {
+            if (flowrateUnits.equalsIgnoreCase("gpm")) {
                 pipe.setFlowRate(flowRate);
             }
-            if (flowrateUnits.equalsIgnoreCase("meters")) {
-                flowRate = UnitConversion.metersToFeet(flowRate);
-                pipe.setFlowRate(flowRate);
-            }
-            if (flowrateUnits.equalsIgnoreCase("inches")) {
-                flowRate = UnitConversion.inchesToFeet(flowRate);
-                pipe.setFlowRate(flowRate);
-            }
-            if (flowrateUnits.equalsIgnoreCase("millimeters")) {
-                flowRate = UnitConversion.millimetersToFeet(flowRate);
+            if (flowrateUnits.equalsIgnoreCase("m^3/hr")) {
+                flowRate = flowRate / 0.2271;
                 pipe.setFlowRate(flowRate);
             }
 
@@ -379,13 +371,28 @@ public class PressureLossUI extends JFrame implements ActionListener {
             double pressureloss = results[3];
 
 
-            //printing results
-            JFrame g = new JFrame();
-            JOptionPane.showMessageDialog(g, String.format("Velocity (ft/s) : %.2f", velocity)
-                    + String.format("\nReynolds Number : %.0f", reynolds)
-                    + String.format("\nFriction Factor : %.4f", frictionfactor)
-                    + String.format("\nPressure Loss (psi): %.2f", pressureloss));
+            //printing inputs and results to console
+            System.out.println("**PRESSURE LOSS**");
+            System.out.printf("[Input] System Fluid = %s\n", fluid);
+            System.out.printf("[Input] Flowrate = %.2f %s\n", flowRate, flowrateUnits);
+            System.out.printf("[Input] Pipe Size (NPS) = %s\n", NPS);
+            System.out.printf("[Input] Pipe Material = %s\n", material);
+            System.out.printf("[Input] Pipe Length = %.2f %s\n", length, lengthUnits);
+            System.out.printf("[Input] Elevation Change = %.2f %s\n", elevationChange, elevationChangeUnits);
+            for (int i = 0; i < 5; i++) {
+                String valve = (String) valves[i].getSelectedItem();
+                if (!(valve.equalsIgnoreCase(""))) {
+                    System.out.printf("[Input] Valve = %s\n", valve);
+                }
+            }
 
+            System.out.printf("[Output] Velocity (ft/s) = %.2f\n", velocity);
+            System.out.printf("[Output] Reynolds No = %.0f\n", reynolds);
+            System.out.printf("[Output] Friction Factor = %.2f\n", frictionfactor);
+            System.out.printf("[Output] Pressure Loss (psi) = %.2f\n", pressureloss);
+
+            //closing PressureLossUI JFrame
+            dispose();
 
         }
     }

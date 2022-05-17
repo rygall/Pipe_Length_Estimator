@@ -17,7 +17,7 @@ public class PSIToHeadUI extends JFrame implements ActionListener {
         //combo box to select system fluid
         FluidOptions = new JComboBox(fluidList);
         FluidOptions.addActionListener(this);
-        FluidOptions.setBounds(10, 10, 105, 30);
+        FluidOptions.setBounds(10, 10, 110, 30);
         FluidOptions.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
         //text field for psi input
@@ -78,7 +78,6 @@ public class PSIToHeadUI extends JFrame implements ActionListener {
         this.add(InputPanel);
         this.add(TextPanel);
 
-
     }
 
 
@@ -104,7 +103,6 @@ public class PSIToHeadUI extends JFrame implements ActionListener {
                 }
             }
 
-
             String fluid = (String) FluidOptions.getSelectedItem();
             psiToHead.setFluid(fluid);
             psiToHead.setPSI(psi);
@@ -112,14 +110,16 @@ public class PSIToHeadUI extends JFrame implements ActionListener {
             //getting result from psiToHead object
             double result = psiToHead.getHead();
 
-            //printing results
-            JFrame g = new JFrame();
-            JOptionPane.showMessageDialog(g, String.format("Head (ft): %.2f", result));
+            System.out.println("**PSI TO HEAD**");
+            System.out.printf("[Input]  Fluid = %s\n", fluid);
+            System.out.printf("[Input]  PSI = %.2f\n", psi);
+            System.out.printf("[Output] Head (ft) = %.2f", result);
+            System.out.println("");
 
+            dispose();
         }
 
+
     }
-
-
 
 }
