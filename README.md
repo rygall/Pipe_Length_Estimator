@@ -39,6 +39,10 @@ Future Features:
 
 - Provide a functionality to input the temperature of fluid in the system for all calculations in order to more accurately determine the properties of the system fluid.
 
+- Pipe Sizing Based Off Fluid Velocity Limit and Flowrate
+
+- Fluid Velocity Calculation Based off Flowate and Pipe Size
+
 
 Future GUI Features:
 
