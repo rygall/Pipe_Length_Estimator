@@ -17,7 +17,7 @@ public class EstimatorUI extends JFrame implements ActionListener {
     EstimatorUI() {
 
         //string array to be used for combo boxes
-        String[] units = {"feet", "meters", "inches", "millimeters"};
+        String[] units = {"Feet", "Meters", "Inches", "Millimeters"};
 
         //creates combo box to select input units
         InputUnitsOptions = new JComboBox(units);
@@ -174,8 +174,8 @@ public class EstimatorUI extends JFrame implements ActionListener {
 
             //printing inputs and results to console
             System.out.println("**LENGTH & FITTINGS ESTIMATION**");
-            System.out.printf("[Input] Total Measured Length = %.2f %s\n", totalLength, unitsInput);
-            System.out.printf("[Output] Estimated Total Length = %.2f %s\n", length, unitsOutput);
+            System.out.printf("[Input] Total Measured Length = %.2f %s\n", totalLength, unitsOutput.toLowerCase());
+            System.out.printf("[Output] Estimated Total Length = %.2f %s\n", length, unitsOutput.toLowerCase());
             System.out.printf("[Output] Estimated 90 Degree Elbows: %d\n", elbows90);
             System.out.printf("[Output] Estimated 45 Degree Elbows: %d\n", elbows45);
 
