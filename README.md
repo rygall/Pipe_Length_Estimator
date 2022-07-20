@@ -46,7 +46,6 @@ Future Features:
 
 Future GUI Features:
 
-- A console to display all results from calculations
 - For the Unit Conversion, add an action listener for the Metric JComboBox to update the input/output JComboBoxes to be the appropriate units based on the metric (i.e. if length is selected as the metric, update the input/output JComboBoxes to be feet, meters, inches, millimeters, etc.).
 
 
